@@ -100,15 +100,12 @@ python run.py \
 ### MLM
 ```shell
 cd pretrain
-deepspeed \
---include="localhost:0,1,2,3,4,5,6,7" \
-mlm_pretrain.py \
+torchrun --nproc_per_node=8 mlm_pretrain.py \
 --output_dir "选择MLM训练后的模型的存储路径" \
 --model_name_or_path "../pretrained_models/graphcodebert-base" \
 --dataset_name_or_path "VD MLM pretrain的json文件路径" \
 --block_size 512 \
 --preprocessing_num_workers 20 \
---deepspeed ./ds_config_zero3.json \
 --fp16 true \
 --do_train true \
 --do_eval false \
@@ -134,15 +131,13 @@ mlm_pretrain.py \
 
 ### MCL task
 ```shell
-deepspeed \
---include="localhost:0,1,2,3,4,5,6,7" \
-momentum_cl_pretrain.py \
+cd pretrain
+torchrun --nproc_per_node=8 momentum_cl_pretrain.py \
 --output_dir "选择训练后的模型的存储路径" \
 --model_name_or_path "选择MLM训练后的模型的存储路径" \
 --dataset_name_or_path "VD CL pretrain的json文件路径" \
 --block_size 512 \
 --preprocessing_num_workers 20 \
---deepspeed ./ds_config_zero3.json \
 --fp16 true \
 --do_train true \
 --do_eval false \
