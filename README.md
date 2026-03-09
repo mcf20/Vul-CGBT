@@ -24,7 +24,7 @@ conda activate environment
 
 ### 微调
 
-### MLM+CL+GNN
+### MLM+MCL+GNN
 1. 运行微调的训练脚本
 ```shell
 cd code
@@ -32,7 +32,7 @@ chmod +x batch_run.sh
 ./batch_run.sh
 ```
 
-### MLM+CL
+### MLM+MCL
 1. 运行微调的训练脚本
 ```shell
 cd code
@@ -49,7 +49,6 @@ chmod +x batch_run_mlm.sh
 ```
 
 ### 测试
-测试都需要用单卡来运行
 1. 对于包含GNN的模型
 以测试Devign举例
 ```shell
@@ -74,7 +73,6 @@ python run_with_gnn.py \
     --seed 990302 \
     --saved_model_bin_path=../pretrained_models/mlm_cl_gnn/model.bin 
 ```
-
 2. 对于不包含GNN的模型
 以测试Devign举例
 ```shell
