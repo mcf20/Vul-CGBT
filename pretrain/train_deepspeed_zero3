@@ -1,1 +1,37 @@
+#!/bin/bash
+export PYTHONPATH=/home/azureuser/cloudfiles/code/Users/mengnanqi/sft:$PYTHONPATH
 
+deepspeed \
+--include="localhost:0,1,2,3,4,5,6,7" \
+./pretrain/mlm_pretrain.py \
+--output_dir "/home/azureuser/cloudfiles/code/Users/yifan/Vul-CGBT/save/mlm_pretrain/" \
+--model_name_or_path "/mnt/graphcodebert-base" \
+--dataset_name_or_path "/home/azureuser/cloudfiles/code/Users/yifan/data/vdpretrain_filter.json" \
+#--output_dir "选择MLM训练后的模型的存储路径" \
+#--model_name_or_path "../pretrained_models/graphcodebert-base" \
+#--dataset_name_or_path "MLM pretrain的json文件路径" \
+--block_size 512 \
+--preprocessing_num_workers 20 \
+--deepspeed ./ds_config_zero3.json \
+--fp16 true \
+--do_train true \
+--do_eval false \
+--gradient_accumulation_steps 4 \
+--gradient_checkpointing true \
+--learning_rate 1.0e-05 \
+--logging_steps 1 \
+--logging_strategy steps \
+--lr_scheduler_type cosine \
+--max_steps -1 \
+--num_train_epochs 10 \
+--overwrite_output_dir true \
+--per_device_eval_batch_size 1 \
+--per_device_train_batch_size 1024 \
+--remove_unused_columns true \
+--save_steps 300 \
+--save_strategy steps \
+--eval_strategy no \
+--save_total_limit 3 \
+--seed 24 \
+--warmup_ratio 0.1 \
+--weight_decay 0.01 \
