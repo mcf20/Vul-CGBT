@@ -22,10 +22,8 @@ conda env create -f environment.yaml
 conda activate environment
 ```
 
-### 微调
-
+### Finetune
 ### MLM+MCL+GNN
-1. 运行微调的训练脚本
 ```shell
 cd code
 chmod +x batch_run.sh
@@ -33,7 +31,6 @@ chmod +x batch_run.sh
 ```
 
 ### MLM+MCL
-1. 运行微调的训练脚本
 ```shell
 cd code
 chmod +x batch_run_mlm_cl.sh
@@ -41,14 +38,13 @@ chmod +x batch_run_mlm_cl.sh
 ```
 
 ### MLM
-1. 运行微调的训练脚本
 ```shell
 cd code
 chmod +x batch_run_mlm.sh
 ./batch_run_mlm.sh
 ```
 
-### 测试
+### Test
 1. 对于包含GNN的模型
 以测试Devign举例
 ```shell
