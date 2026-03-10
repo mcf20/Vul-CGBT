@@ -1,3 +1,5 @@
+LLMs prompts: qwen,codellama,deepseek
+
 SYSTEM_PROMPT = (
     "You are a secure code reviewer. Your job is to decide whether the given "
     "function contains a vulnerability. Reply with only one word: VULNERABLE or SAFE."
