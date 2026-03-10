@@ -22,13 +22,13 @@ torchrun --nproc_per_node=8 run_with_gnn.py \
     --seed 990302 \
     --saved_model_bin_path=../pretrained_models/mlm_mcl_gnn/model.bin 
 
-# 检查 reveal 任务是否成功运行  
+
 if [ $? -ne 0 ]; then  
     echo "Running reveal task failed"  
     exit 1  
 fi  
   
-# 运行 devign 任务  
+# run devign task  
 echo "Running devign task"  
 torchrun --nproc_per_node=8 run_with_gnn.py \
     --output_dir=../saved_models/mlm_mcl_gnn_on_devign \
@@ -49,13 +49,12 @@ torchrun --nproc_per_node=8 run_with_gnn.py \
     --seed 990302 \
     --saved_model_bin_path=../pretrained_models/mlm_mcl_gnn/model.bin 
 
-# 检查 devign 任务是否成功运行  
 if [ $? -ne 0 ]; then  
     echo "Running devign task failed"  
     exit 1  
 fi  
   
-# 运行 bigvul 任务  
+run bigvul task
 echo "Running bigvul task"  
 torchrun --nproc_per_node=8 run_with_gnn.py \
     --output_dir=../saved_models/mlm_mcl_gnn_on_bigvul \
@@ -76,11 +75,10 @@ torchrun --nproc_per_node=8 run_with_gnn.py \
     --seed 990302 \
     --saved_model_bin_path=../pretrained_models/mlm_mcl_gnn/model.bin 
 
-# 检查 bigvul 任务是否成功运行  
+
 if [ $? -ne 0 ]; then  
     echo "Running bigvul task failed"  
     exit 1  
 fi  
   
-# 打印消息指示所有脚本已成功运行  
 echo "All Python scripts ran successfully."
