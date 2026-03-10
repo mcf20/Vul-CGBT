@@ -1,29 +1,25 @@
 # Vul-CGBT
 Vul-CGBT: Enhancing Code Vulnerability Detection via Contrastive Semantic Learning and Graph Embedding
 # Vulnerability Detection
-
 ## Task Define
-
 Given a source code, the task is to identify whether it is an insecure code that may attack software systems, such as resource leaks, use-after-free vulnerabilities and DoS attack.  We treat the task as binary classification (0/1), where 1 stands for insecure code and 0 for secure code.
 
 ## environment install
 
-1. 切换到根目录下
-
-2.预先需要安装好Anaconda
-
-3.运行
+1. Change to the root directory.  #cd 
+2.You need to have Anaconda installed beforehand.
+3.run
 
 ```shell
 conda env create -f environment.yaml  
 ```
-4.激活环境
+4.activate environment
 ```shell
 conda activate environment
 ```
 
 ### Finetune
-### MLM+MCL+GNN
+### Vul-CGBT
 ```shell
 cd code
 chmod +x batch_run.sh
@@ -45,8 +41,8 @@ chmod +x batch_run_mlm.sh
 ```
 
 ### Test
-1. 对于包含GNN的模型
-以测试Devign举例
+1. For models incorporating GNNs, including those using CFG alone, DFG alone, and both CFG and DFG simultaneously.
+Take testing Devign as an example.
 ```shell
 cd code
 export CUDA_VISIBLE_DEVICES=0
@@ -69,8 +65,8 @@ python run_with_gnn.py \
     --seed 990302 \
     --saved_model_bin_path=../pretrained_models/mlm_cl_gnn/model.bin 
 ```
-2. 对于不包含GNN的模型
-以测试Devign举例
+2. For models that do not incorporate GNNs (MLM+MCL,MLM)
+Take testing Devign as an example.
 ```shell
 cd code
 python run.py \
@@ -97,9 +93,9 @@ python run.py \
 ```shell
 cd pretrain
 torchrun --nproc_per_node=8 mlm_pretrain.py \
---output_dir "选择MLM训练后的模型的存储路径" \
+--output_dir "MLM" \
 --model_name_or_path "../pretrained_models/graphcodebert-base" \
---dataset_name_or_path "VD MLM pretrain的json文件路径" \
+--dataset_name_or_path "MLM pretrain.json" \
 --block_size 512 \
 --preprocessing_num_workers 20 \
 --fp16 true \
@@ -129,9 +125,9 @@ torchrun --nproc_per_node=8 mlm_pretrain.py \
 ```shell
 cd pretrain
 torchrun --nproc_per_node=8 momentum_cl_pretrain.py \
---output_dir "选择训练后的模型的存储路径" \
---model_name_or_path "选择MLM训练后的模型的存储路径" \
---dataset_name_or_path "VD CL pretrain的json文件路径" \
+--output_dir "MCL" \
+--model_name_or_path "MLM" \
+--dataset_name_or_path "MCL pretrain.json" \
 --block_size 512 \
 --preprocessing_num_workers 20 \
 --fp16 true \
