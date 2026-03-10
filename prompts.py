@@ -1,4 +1,4 @@
-LLMs prompts: qwen,codellama,deepseek
+#LLMs prompts: qwen,codellama,deepseek
 
 SYSTEM_PROMPT = (
     "You are a secure code reviewer. Your job is to decide whether the given "
