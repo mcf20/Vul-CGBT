@@ -29,7 +29,7 @@ chmod +x batch_run.sh
 ### MLM+MCL
 ```shell
 cd code
-chmod +x batch_run_mlm_cl.sh
+chmod +x batch_run_mlm_mcl.sh
 ./batch_run_mlm_cl.sh
 ```
 
@@ -47,7 +47,7 @@ Take testing Devign as an example.
 cd code
 export CUDA_VISIBLE_DEVICES=0
 python run_with_gnn.py \
-    --output_dir=../saved_models/mlm_cl_gnn_on_devign \
+    --output_dir=../saved_models/mlm_mcl_gnn_on_devign \
     --model_type=roberta \
     --tokenizer_name=../pretrained_models/graphcodebert-base/ \
     --model_name_or_path=../pretrained_models/graphcodebert-base/ \
@@ -70,7 +70,7 @@ Take testing Devign as an example.
 ```shell
 cd code
 python run.py \
-    --output_dir=../saved_models/mlm_cl_on_devign \
+    --output_dir=../saved_models/mlm_mcl_on_devign \
     --model_type=roberta \
     --tokenizer_name=../pretrained_models/graphcodebert-base/ \
     --model_name_or_path=../pretrained_models/graphcodebert-base/ \
